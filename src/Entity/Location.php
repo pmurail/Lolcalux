@@ -26,17 +26,24 @@ class Location
     private $numlocation;
 
     /**
-     * @var int
+     * @var \Trajet
      *
-     * @ORM\Column(name="IDTRAJET", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Trajet")
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="IDTRAJET", referencedColumnName="IDTRAJET")
+     * })
      */
     private $idtrajet;
 
     /**
-     * @var string
+     * @var \Utilisateur
      *
-     * @ORM\Column(name="IDUTILISATEUR", type="string", length=32, nullable=false, options={"fixed"=true})
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
+     * })
      */
+    
     private $idutilisateur;
 
     /**
@@ -44,66 +51,66 @@ class Location
      *
      * @ORM\Column(name="DATELOCATION", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $datelocation = 'NULL';
+    private $datelocation = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="MONTANT", type="decimal", precision=10, scale=2, nullable=true, options={"default"="NULL"})
      */
-    private $montant = 'NULL';
+    private $montant = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="DATEHEUREDEPARTP", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $dateheuredepartp = 'NULL';
+    private $dateheuredepartp = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="HATEHEURERETOURP", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $hateheureretourp = 'NULL';
+    private $hateheureretourp = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="DATEHEUREDEPARTR", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $dateheuredepartr = 'NULL';
+    private $dateheuredepartr = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="DATEHEURERETOURR", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $dateheureretourr = 'NULL';
+    private $dateheureretourr = NULL;
 
     public function getNumlocation(): ?int
     {
         return $this->numlocation;
     }
 
-    public function getIdtrajet(): ?int
+    public function getIdtrajet(): ?Trajet
     {
         return $this->idtrajet;
     }
 
-    public function setIdtrajet(int $idtrajet): self
+    public function setIdtrajet(?Trajet $idtrajet): self
     {
         $this->idtrajet = $idtrajet;
 
         return $this;
     }
 
-    public function getIdutilisateur(): ?string
+    public function getIdutilisateur(): ?Utilisateur
     {
         return $this->idutilisateur;
     }
 
-    public function setIdutilisateur(string $idutilisateur): self
+    public function setIdutilisateur(?Utilisateur $idutilisateur): self
     {
         $this->idutilisateur = $idutilisateur;
 

@@ -1,15 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
-  <h1>Ceci est la page d'accueil</h1>
-
-</div>
-{% endblock %}
+	<h1 style="text-align: center; margin-right:4.5%;">Reservation Localux</h1>
+	<br>
+	<form method="post" action="{{path ('reservation')}}">
+		<div class="container" style="text-align: center;">
+			<div class="row">
+				{% for uneFormule in lesFormules %}
+					<div class="col-sm-4">
+						<div class="card" style="width: 20rem; height: 300px; margin-bottom:20px; border-radius:15%;">
+							<div class="card-body">
+								<h5 class="card-title">{{uneFormule.libelle}}</h5>
+								<p class="card-text">{{uneFormule.duree|date('h:m:s')}}</p>
+								<p class="card-text">{{uneFormule.nbkminclus}}</p>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="formule" id="flexRadioDefault1" value="{{uneFormule.idformule}}">
+									<label class="form-check-label" for="flexRadioDefault1">
+										Sélectionner
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				<select class="form-select" aria-label="Default select example"  name="modele" style="margin-bottom: 20px;">
+					<option selected>Selectionner un modèle</option>
+					{% for unModeles in lesModeles %}
+					<option value="{{unModeles.idmodele}}">{{unModeles.libelle}}</option>
+					{% endfor %}
+				</select>
+				<select class="form-select" aria-label="Default select example" name="trajet" style="margin-bottom: 20px;">
+					<option selected>Selectionner un trajet</option>
+					{% for unTrajets in lesTrajets %}
+					<option value="{{unTrajets.idtrajet}}">{{unTrajets.lieudepart}} - {{unTrajets.lieuarrivee}}</option>
+					{% endfor %}
+				</select>
+				<input type="submit"></input>
+		</form>
+	{% endblock %}
