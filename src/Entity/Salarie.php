@@ -19,6 +19,8 @@ class Salarie extends Utilisateur
      */
     private $poste;
 
+    
+
     public function getPoste(): ?string
     {
         return $this->poste;
@@ -30,5 +32,6 @@ class Salarie extends Utilisateur
 
         return $this;
     }
+
 
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Vehicule
  *
- * @ORM\Table(name="VEHICULE", indexes={@ORM\Index(name="I_FK_VEHICULE_LOCATION", columns={"NUMLOCATION"}), @ORM\Index(name="I_FK_VEHICULE_MODELE", columns={"IDMODELE"}), @ORM\Index(name="I_FK_VEHICULE_PARTIEVEHICULE", columns={"IDPARTIEVEHICULE"})})
+ * @ORM\Table(name="VEHICULE", indexes={@ORM\Index(name="I_FK_VEHICULE_PARTIEVEHICULE", columns={"IDPARTIEVEHICULE"}), @ORM\Index(name="I_FK_VEHICULE_LOCATION", columns={"NUMLOCATION"}), @ORM\Index(name="I_FK_VEHICULE_MODELE", columns={"IDMODELE"})})
  * @ORM\Entity
  */
 class Vehicule
@@ -29,16 +29,6 @@ class Vehicule
     private $immatriculation;
 
     /**
-     * @var \Modele
-     *
-     * @ORM\ManyToOne(targetEntity="Modele")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDMODELE", referencedColumnName="IDMODELE")
-     * })
-     */
-    private $idmodele;
-
-    /**
      * @var \Location
      *
      * @ORM\ManyToOne(targetEntity="Location")
@@ -58,6 +48,16 @@ class Vehicule
      */
     private $idpartievehicule;
 
+    /**
+     * @var \Modele
+     *
+     * @ORM\ManyToOne(targetEntity="Modele")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDMODELE", referencedColumnName="IDMODELE")
+     * })
+     */
+    private $idmodele;
+
     public function getIdvehicule(): ?int
     {
         return $this->idvehicule;
@@ -71,18 +71,6 @@ class Vehicule
     public function setImmatriculation(?string $immatriculation): self
     {
         $this->immatriculation = $immatriculation;
-
-        return $this;
-    }
-
-    public function getIdmodele(): ?Modele
-    {
-        return $this->idmodele;
-    }
-
-    public function setIdmodele(?Modele $idmodele): self
-    {
-        $this->idmodele = $idmodele;
 
         return $this;
     }
@@ -107,6 +95,18 @@ class Vehicule
     public function setIdpartievehicule(?Partievehicule $idpartievehicule): self
     {
         $this->idpartievehicule = $idpartievehicule;
+
+        return $this;
+    }
+
+    public function getIdmodele(): ?Modele
+    {
+        return $this->idmodele;
+    }
+
+    public function setIdmodele(?Modele $idmodele): self
+    {
+        $this->idmodele = $idmodele;
 
         return $this;
     }

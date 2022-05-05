@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Historiquemdp
  *
- * @ORM\Table(name="HISTORIQUEMDP")
+ * @ORM\Table(name="HISTORIQUEMDP", indexes={@ORM\Index(name="I_FK_HISTORIQUEMDP_UTILISATEUR", columns={"IDUTILISATEUR"})})
  * @ORM\Entity
  */
 class Historiquemdp
@@ -15,16 +15,16 @@ class Historiquemdp
     /**
      * @var int
      *
-     * @ORM\Column(name="IDUTILISATEUR", type="integer", nullable=false)
+     * @ORM\Column(name="IDHISTORIQUEMDP", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idutilisateur;
+    private $idhistoriquemdp;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="ANCIENMDP", type="string", length=255, nullable=true, options={"fixed"=true})
+     * @ORM\Column(name="ANCIENMDP", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $ancienmdp;
 
@@ -35,9 +35,19 @@ class Historiquemdp
      */
     private $datecreationmdp;
 
-    public function getIdutilisateur(): ?int
+    /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
+     * })
+     */
+    private $idutilisateur;
+
+    public function getIdhistoriquemdp(): ?int
     {
-        return $this->idutilisateur;
+        return $this->idhistoriquemdp;
     }
 
     public function getAncienmdp(): ?string
@@ -60,6 +70,18 @@ class Historiquemdp
     public function setDatecreationmdp(?\DateTimeInterface $datecreationmdp): self
     {
         $this->datecreationmdp = $datecreationmdp;
+
+        return $this;
+    }
+
+    public function getIdutilisateur(): ?Utilisateur
+    {
+        return $this->idutilisateur;
+    }
+
+    public function setIdutilisateur(?Utilisateur $idutilisateur): self
+    {
+        $this->idutilisateur = $idutilisateur;
 
         return $this;
     }

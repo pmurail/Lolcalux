@@ -36,6 +36,8 @@ class Locationavecchauffeur extends Location
      */
     private $idformule;
 
+   
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -59,7 +61,6 @@ class Locationavecchauffeur extends Location
 
         return $this;
     }
-
 
     public function getIdformule(): ?Formuleavecchauffeur
     {

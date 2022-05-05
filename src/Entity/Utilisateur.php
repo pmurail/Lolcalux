@@ -3,13 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Utilisateur
  *
- * @ORM\Table(name="UTILISATEUR", uniqueConstraints={@ORM\UniqueConstraint(name="I_FK_UTILISATEUR_HISTORIQUEMDP", columns={"IDHISTORIQUEMDP"})})
+ * @ORM\Table(name="UTILISATEUR")
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeUser", type="string")
@@ -30,40 +29,33 @@ class Utilisateur implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $nom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $prenom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LOGIN", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LOGIN", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $login;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="MDP", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="MDP", type="string", length=255, nullable=true, options={"fixed"=true})
      */
     private $mdp;
 
-    /**
-     * @var \Historiquemdp
-     *
-     * @ORM\ManyToOne(targetEntity="Historiquemdp")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDHISTORIQUEMDP", referencedColumnName="IDHISTORIQUEMDP")
-     * })
-     */
-    private $idhistoriquemdp;
+
+
 
     public function getIdutilisateur(): ?int
     {
@@ -118,19 +110,8 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getIdhistoriquemdp(): ?Historiquemdp
-    {
-        return $this->idhistoriquemdp;
-    }
 
-    public function setIdhistoriquemdp(?Historiquemdp $idhistoriquemdp): self
-    {
-        $this->idhistoriquemdp = $idhistoriquemdp;
-
-        return $this;
-    }
-
-    /**
+     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -187,4 +168,6 @@ class Utilisateur implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
 }

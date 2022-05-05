@@ -30,6 +30,8 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Trajet::class);
         $lesTrajets = $repository->findAll();
         dump($this->getUser()) ;
+        $date = date("Y-m-d H:i:s");
+        dump(date("Y-m-d H:i:s", strtotime($date. ' + 2 hours')));
         return $this->render('home/index.html.twig', ['lesFormules' => $lesFormules, 'lesModeles' => $lesModeles, 'lesTrajets' => $lesTrajets]);
     }
 

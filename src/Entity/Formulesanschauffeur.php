@@ -27,7 +27,6 @@ class Formulesanschauffeur extends Formule
     private $nbkminclus;
 
 
-
     public function getDuree(): ?\DateTimeInterface
     {
         return $this->duree;

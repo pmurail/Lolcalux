@@ -66,6 +66,15 @@ class Location
      */
     private $dateheureretourr;
 
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
+     * })
+     */
+    private $idutilisateur;
 
     /**
      * @var \Trajet
@@ -76,16 +85,6 @@ class Location
      * })
      */
     private $idtrajet;
-
-    /**
-     * @var \Client
-     *
-     * @ORM\ManyToOne(targetEntity="Client")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
-     * })
-     */
-    private $idutilisateur;
 
     public function getNumlocation(): ?int
     {
@@ -165,6 +164,17 @@ class Location
     }
 
 
+    public function getIdutilisateur(): ?Client
+    {
+        return $this->idutilisateur;
+    }
+
+    public function setIdutilisateur(?Client $idutilisateur): self
+    {
+        $this->idutilisateur = $idutilisateur;
+
+        return $this;
+    }
 
     public function getIdtrajet(): ?Trajet
     {
@@ -174,18 +184,6 @@ class Location
     public function setIdtrajet(?Trajet $idtrajet): self
     {
         $this->idtrajet = $idtrajet;
-
-        return $this;
-    }
-
-    public function getIdutilisateur(): ?Client
-    {
-        return $this->idutilisateur;
-    }
-
-    public function setIdutilisateur(?Client $idutilisateur): self
-    {
-        $this->idutilisateur = $idutilisateur;
 
         return $this;
     }

@@ -26,7 +26,6 @@ class Formuleavecchauffeur extends Formule
      */
     private $tarif;
 
-
     public function getLieu(): ?string
     {
         return $this->lieu;

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tarification
  *
- * @ORM\Table(name="TARIFICATION", indexes={@ORM\Index(name="I_FK_TARIFICATION_FORMULE", columns={"IDFORMULE"}), @ORM\Index(name="I_FK_TARIFICATION_MODELE", columns={"IDMODELE"})})
+ * @ORM\Table(name="TARIFICATION", indexes={@ORM\Index(name="I_FK_TARIFICATION_MODELE", columns={"IDMODELE"}), @ORM\Index(name="I_FK_TARIFICATION_FORMULE", columns={"IDFORMULE"})})
  * @ORM\Entity
  */
 class Tarification
@@ -29,16 +29,6 @@ class Tarification
     private $tarif;
 
     /**
-     * @var \Modele
-     *
-     * @ORM\ManyToOne(targetEntity="Modele")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IDMODELE", referencedColumnName="IDMODELE")
-     * })
-     */
-    private $idmodele;
-
-    /**
      * @var \Formule
      *
      * @ORM\ManyToOne(targetEntity="Formule")
@@ -47,6 +37,16 @@ class Tarification
      * })
      */
     private $idformule;
+
+    /**
+     * @var \Modele
+     *
+     * @ORM\ManyToOne(targetEntity="Modele")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDMODELE", referencedColumnName="IDMODELE")
+     * })
+     */
+    private $idmodele;
 
     public function getIdtarification(): ?int
     {
@@ -65,18 +65,6 @@ class Tarification
         return $this;
     }
 
-    public function getIdmodele(): ?Modele
-    {
-        return $this->idmodele;
-    }
-
-    public function setIdmodele(?Modele $idmodele): self
-    {
-        $this->idmodele = $idmodele;
-
-        return $this;
-    }
-
     public function getIdformule(): ?Formule
     {
         return $this->idformule;
@@ -85,6 +73,18 @@ class Tarification
     public function setIdformule(?Formule $idformule): self
     {
         $this->idformule = $idformule;
+
+        return $this;
+    }
+
+    public function getIdmodele(): ?Modele
+    {
+        return $this->idmodele;
+    }
+
+    public function setIdmodele(?Modele $idmodele): self
+    {
+        $this->idmodele = $idmodele;
 
         return $this;
     }

@@ -31,7 +31,8 @@ class Formule
      */
     private $libelle;
 
- 
+  
+
     public function getIdformule(): ?int
     {
         return $this->idformule;
@@ -48,7 +49,6 @@ class Formule
 
         return $this;
     }
-
 
 
 }

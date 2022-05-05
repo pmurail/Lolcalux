@@ -47,6 +47,7 @@ class Client extends Utilisateur
      */
     private $ville;
 
+
     public function getTel(): ?string
     {
         return $this->tel;
@@ -106,5 +107,6 @@ class Client extends Utilisateur
 
         return $this;
     }
+
 
 }

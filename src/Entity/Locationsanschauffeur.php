@@ -36,6 +36,8 @@ class Locationsanschauffeur extends Location
      */
     private $idformule;
 
+    
+
     public function getNbkmdepart(): ?string
     {
         return $this->nbkmdepart;
