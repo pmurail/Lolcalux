@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tarification
  *
- * @ORM\Table(name="TARIFICATION", indexes={@ORM\Index(name="I_FK_TARIFICATION_MODELE", columns={"IDMODELE"}), @ORM\Index(name="I_FK_TARIFICATION_FORMULE", columns={"IDFORMULE"})})
+ * @ORM\Table(name="TARIFICATION", indexes={@ORM\Index(name="I_FK_TARIFICATION_FORMULE", columns={"IDFORMULE"}), @ORM\Index(name="I_FK_TARIFICATION_MODELE", columns={"IDMODELE"})})
  * @ORM\Entity
  */
 class Tarification
@@ -22,53 +22,35 @@ class Tarification
     private $idtarification;
 
     /**
-     * @var int
+     * @var string|null
      *
-     * @ORM\Column(name="IDFORMULE", type="integer", nullable=false)
+     * @ORM\Column(name="TARIF", type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $idformule;
+    private $tarif;
 
     /**
-     * @var int
+     * @var \Modele
      *
-     * @ORM\Column(name="IDMODELE", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Modele")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDMODELE", referencedColumnName="IDMODELE")
+     * })
      */
     private $idmodele;
 
     /**
-     * @var string|null
+     * @var \Formule
      *
-     * @ORM\Column(name="TARIF", type="decimal", precision=10, scale=2, nullable=true, options={"default"="NULL"})
+     * @ORM\ManyToOne(targetEntity="Formule")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDFORMULE", referencedColumnName="IDFORMULE")
+     * })
      */
-    private $tarif = 'NULL';
+    private $idformule;
 
     public function getIdtarification(): ?int
     {
         return $this->idtarification;
-    }
-
-    public function getIdformule(): ?int
-    {
-        return $this->idformule;
-    }
-
-    public function setIdformule(int $idformule): self
-    {
-        $this->idformule = $idformule;
-
-        return $this;
-    }
-
-    public function getIdmodele(): ?int
-    {
-        return $this->idmodele;
-    }
-
-    public function setIdmodele(int $idmodele): self
-    {
-        $this->idmodele = $idmodele;
-
-        return $this;
     }
 
     public function getTarif(): ?string
@@ -79,6 +61,30 @@ class Tarification
     public function setTarif(?string $tarif): self
     {
         $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    public function getIdmodele(): ?Modele
+    {
+        return $this->idmodele;
+    }
+
+    public function setIdmodele(?Modele $idmodele): self
+    {
+        $this->idmodele = $idmodele;
+
+        return $this;
+    }
+
+    public function getIdformule(): ?Formule
+    {
+        return $this->idformule;
+    }
+
+    public function setIdformule(?Formule $idformule): self
+    {
+        $this->idformule = $idformule;
 
         return $this;
     }

@@ -15,16 +15,17 @@ class Formuleavecchauffeur extends Formule
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIEU", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIEU", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $lieu = 'NULL';
+    private $lieu;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="TARIF", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="TARIF", type="integer", nullable=true)
      */
-    private $tarif = NULL;
+    private $tarif;
+
 
     public function getLieu(): ?string
     {

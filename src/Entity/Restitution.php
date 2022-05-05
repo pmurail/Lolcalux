@@ -22,55 +22,46 @@ class Restitution
     private $idrestitution;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="NUMLOCATION", type="integer", nullable=false)
-     */
-    private $numlocation;
-
-    /**
      * @var int|null
      *
-     * @ORM\Column(name="KILOMETRAGE", type="bigint", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="KILOMETRAGE", type="bigint", nullable=true)
      */
-    private $kilometrage = 'NULL';
+    private $kilometrage;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATERESTITUTION", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATERESTITUTION", type="datetime", nullable=true)
      */
-    private $daterestitution = 'NULL';
+    private $daterestitution;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="OBSERVATIONS", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="OBSERVATIONS", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $observations = 'NULL';
+    private $observations;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="ESTIMATIONCOUTS", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="ESTIMATIONCOUTS", type="integer", nullable=true)
      */
-    private $estimationcouts = NULL;
+    private $estimationcouts;
+
+    /**
+     * @var \Location
+     *
+     * @ORM\ManyToOne(targetEntity="Location")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="NUMLOCATION", referencedColumnName="NUMLOCATION")
+     * })
+     */
+    private $numlocation;
 
     public function getIdrestitution(): ?int
     {
         return $this->idrestitution;
-    }
-
-    public function getNumlocation(): ?int
-    {
-        return $this->numlocation;
-    }
-
-    public function setNumlocation(int $numlocation): self
-    {
-        $this->numlocation = $numlocation;
-
-        return $this;
     }
 
     public function getKilometrage(): ?string
@@ -117,6 +108,18 @@ class Restitution
     public function setEstimationcouts(?int $estimationcouts): self
     {
         $this->estimationcouts = $estimationcouts;
+
+        return $this;
+    }
+
+    public function getNumlocation(): ?Location
+    {
+        return $this->numlocation;
+    }
+
+    public function setNumlocation(?Location $numlocation): self
+    {
+        $this->numlocation = $numlocation;
 
         return $this;
     }

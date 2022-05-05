@@ -22,34 +22,25 @@ class Dommage
     private $iddommage;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="IDRESTITUTION", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $idrestitution = NULL;
-
-    /**
      * @var string|null
      *
-     * @ORM\Column(name="TYPEDOMMAGE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="TYPEDOMMAGE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $typedommage = 'NULL';
+    private $typedommage;
+
+    /**
+     * @var \Restitution
+     *
+     * @ORM\ManyToOne(targetEntity="Restitution")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDRESTITUTION", referencedColumnName="IDRESTITUTION")
+     * })
+     */
+    private $idrestitution;
 
     public function getIddommage(): ?int
     {
         return $this->iddommage;
-    }
-
-    public function getIdrestitution(): ?int
-    {
-        return $this->idrestitution;
-    }
-
-    public function setIdrestitution(?int $idrestitution): self
-    {
-        $this->idrestitution = $idrestitution;
-
-        return $this;
     }
 
     public function getTypedommage(): ?string
@@ -60,6 +51,18 @@ class Dommage
     public function setTypedommage(?string $typedommage): self
     {
         $this->typedommage = $typedommage;
+
+        return $this;
+    }
+
+    public function getIdrestitution(): ?Restitution
+    {
+        return $this->idrestitution;
+    }
+
+    public function setIdrestitution(?Restitution $idrestitution): self
+    {
+        $this->idrestitution = $idrestitution;
 
         return $this;
     }

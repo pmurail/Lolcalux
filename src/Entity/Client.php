@@ -12,42 +12,40 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Client extends Utilisateur
 {
-
     /**
      * @var string|null
      *
-     * @ORM\Column(name="TEL", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="TEL", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $tel;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="EMAIL", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="EMAIL", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $email;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="RUE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="RUE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $rue;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="CP", type="string", length=5, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="CP", type="string", length=5, nullable=true, options={"fixed"=true})
      */
     private $cp;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="VILLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="VILLE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
     private $ville;
-
 
     public function getTel(): ?string
     {
@@ -108,6 +106,5 @@ class Client extends Utilisateur
 
         return $this;
     }
-
 
 }

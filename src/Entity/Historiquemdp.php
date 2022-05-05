@@ -15,29 +15,29 @@ class Historiquemdp
     /**
      * @var int
      *
-     * @ORM\Column(name="IDHISTORIQUEMDP", type="integer", nullable=false)
+     * @ORM\Column(name="IDUTILISATEUR", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idhistoriquemdp;
+    private $idutilisateur;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="ANCIENMDP", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="ANCIENMDP", type="string", length=255, nullable=true, options={"fixed"=true})
      */
-    private $ancienmdp = 'NULL';
+    private $ancienmdp;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATECREATIONMDP", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATECREATIONMDP", type="datetime", nullable=true)
      */
-    private $datecreationmdp = 'NULL';
+    private $datecreationmdp;
 
-    public function getIdhistoriquemdp(): ?int
+    public function getIdutilisateur(): ?int
     {
-        return $this->idhistoriquemdp;
+        return $this->idutilisateur;
     }
 
     public function getAncienmdp(): ?string

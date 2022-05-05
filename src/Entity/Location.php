@@ -13,8 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="typeLocation", type="string")
  * @ORM\DiscriminatorMap({"location" = "Location", "locationavecchauffeur" = "Locationavecchauffeur", "locationsanschauffeur" = "Locationsanschauffeur"})
  */
-
-class Location 
+class Location
 {
     /**
      * @var int
@@ -26,88 +25,71 @@ class Location
     private $numlocation;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="IDTRAJET", type="integer", nullable=false)
-     */
-    private $idtrajet;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="IDUTILISATEUR", type="string", length=32, nullable=false, options={"fixed"=true})
-     */
-    private $idutilisateur;
-
-    /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATELOCATION", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATELOCATION", type="datetime", nullable=true)
      */
-    private $datelocation = 'NULL';
+    private $datelocation;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="MONTANT", type="decimal", precision=10, scale=2, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="MONTANT", type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $montant = 'NULL';
+    private $montant;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHEUREDEPARTP", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHEUREDEPARTP", type="datetime", nullable=true)
      */
-    private $dateheuredepartp = 'NULL';
+    private $dateheuredepartp;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="HATEHEURERETOURP", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="HATEHEURERETOURP", type="datetime", nullable=true)
      */
-    private $hateheureretourp = 'NULL';
+    private $hateheureretourp;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHEUREDEPARTR", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHEUREDEPARTR", type="datetime", nullable=true)
      */
-    private $dateheuredepartr = 'NULL';
+    private $dateheuredepartr;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DATEHEURERETOURR", type="datetime", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DATEHEURERETOURR", type="datetime", nullable=true)
      */
-    private $dateheureretourr = 'NULL';
+    private $dateheureretourr;
+
+
+    /**
+     * @var \Trajet
+     *
+     * @ORM\ManyToOne(targetEntity="Trajet")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDTRAJET", referencedColumnName="IDTRAJET")
+     * })
+     */
+    private $idtrajet;
+
+    /**
+     * @var \Client
+     *
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="IDUTILISATEUR", referencedColumnName="IDUTILISATEUR")
+     * })
+     */
+    private $idutilisateur;
 
     public function getNumlocation(): ?int
     {
         return $this->numlocation;
-    }
-
-    public function getIdtrajet(): ?int
-    {
-        return $this->idtrajet;
-    }
-
-    public function setIdtrajet(int $idtrajet): self
-    {
-        $this->idtrajet = $idtrajet;
-
-        return $this;
-    }
-
-    public function getIdutilisateur(): ?string
-    {
-        return $this->idutilisateur;
-    }
-
-    public function setIdutilisateur(string $idutilisateur): self
-    {
-        $this->idutilisateur = $idutilisateur;
-
-        return $this;
     }
 
     public function getDatelocation(): ?\DateTimeInterface
@@ -178,6 +160,32 @@ class Location
     public function setDateheureretourr(?\DateTimeInterface $dateheureretourr): self
     {
         $this->dateheureretourr = $dateheureretourr;
+
+        return $this;
+    }
+
+
+
+    public function getIdtrajet(): ?Trajet
+    {
+        return $this->idtrajet;
+    }
+
+    public function setIdtrajet(?Trajet $idtrajet): self
+    {
+        $this->idtrajet = $idtrajet;
+
+        return $this;
+    }
+
+    public function getIdutilisateur(): ?Client
+    {
+        return $this->idutilisateur;
+    }
+
+    public function setIdutilisateur(?Client $idutilisateur): self
+    {
+        $this->idutilisateur = $idutilisateur;
 
         return $this;
     }

@@ -28,10 +28,11 @@
 	</head>
 	<body>
 
-	<div class="container">
-				<nav class="navbar navbar-expand-lg">
+			
+		<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+			<div class="container">
 					<a class="navbar-brand" href="{{path('app_home')}}">Localux</a>
-				</button>
+				
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
@@ -42,13 +43,15 @@
 							<a class="nav-link active" aria-current="page" href="{{path('app_register')}}">Inscription</a>
 						</li>
 						{# {% for Location in lesLocations %} #}
-						<li class="nav-item active">
+						{# <li class="nav-item active">
 							<a class="nav-link" href="{{path('ListeReservation')}}">Réservation</a>
-						</li>
+						</li> #}
 						{# {% endfor %} #}
 					</ul>
 				</div>
 			</div>
+		</nav>
+
 		{# <nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{path('app_home')}}">Localux</a>

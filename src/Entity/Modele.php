@@ -24,16 +24,16 @@ class Modele
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $libelle = 'NULL';
+    private $libelle;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="TARIF", type="decimal", precision=10, scale=2, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="TARIF", type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $tarif = 'NULL';
+    private $tarif;
 
     public function getIdmodele(): ?int
     {

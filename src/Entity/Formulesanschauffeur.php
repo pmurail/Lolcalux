@@ -15,16 +15,17 @@ class Formulesanschauffeur extends Formule
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="DUREE", type="time", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="DUREE", type="time", nullable=true)
      */
-    private $duree = 'NULL';
+    private $duree;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="NBKMINCLUS", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="NBKMINCLUS", type="integer", nullable=true)
      */
-    private $nbkminclus = NULL;
+    private $nbkminclus;
+
 
 
     public function getDuree(): ?\DateTimeInterface
@@ -50,5 +51,6 @@ class Formulesanschauffeur extends Formule
 
         return $this;
     }
+
 
 }

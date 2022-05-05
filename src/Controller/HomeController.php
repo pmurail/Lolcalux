@@ -3,6 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Formule;
+use App\Entity\Formulesanschauffeur;
+use App\Entity\Locationsanschauffeur;
+use App\Entity\Modele;
+use App\Entity\Trajet;
 use App\Entity\Utilisateur;
 use App\Entity\Vehicule;
 use App\Entity\Location;
@@ -21,9 +26,14 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $repository = $this->getDoctrine()->getRepository(Formulesanschauffeur::class);
+        $lesFormules = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Modele::class);
+        $lesModeles = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Trajet::class);
+        $lesTrajets = $repository->findAll();
+        dump($this->getUser()) ;
+        return $this->render('home/index.html.twig', ['lesFormules' => $lesFormules, 'lesModeles' => $lesModeles, 'lesTrajets' => $lesTrajets]);
     }
 
     /**
@@ -46,76 +56,52 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/getReservation", name="getReservation", methods="GET")
+     * @Route("/reservation", name="reservation")
      */
-    public function getReservation()
+    public function reservation(Request $request): Response
     {
-        $serializer = $this->get('serializer');
-        $repository = $this->getDoctrine()->getRepository(Location::class);
-        $products = $repository->findAll();
-        $json = $serializer->serialize($products, 'json');
-        return new Response($json);
+        $modele = $request->request->get("modele");
+        //$trajet = $request->request->get("trajet");
+        $formule = $request->request->get("formule");
+        $vehicule = new Vehicule;
+        //$vehicule->setImmatriculation("FR-85-SIO");
+        $vehicule->setIdmodele($this->getDoctrine()->getRepository(Modele::class)->findOneBy(['idmodele' => $modele]));
+        $location = new Locationsanschauffeur;
+        $location->setIdformule($this->getDoctrine()->getRepository(Formule::class)->findOneBy(['idformule' => $formule]));
+        //$location->setIdtrajet($this->getDoctrine()->getRepository(Trajet::class)->findOneBy(['idtrajet' => $trajet]));
+        $location->setIdutilisateur($this->getUser());
+
+
+
+        $location = new Location();
+        $dateloc = new \DateTime('now');
+        $dateD = $request->request->get('dateD');
+        $dateR = $request->request->get('dateR');
+        $location->setIdutilisateur($this->getUser());
+
+        $dateD = $request->request->get('dateD');
+        $dateR = $request->request->get('dateR');
+
+        $dateloc = date('Y-m-d H:i:s');
+        $dateloc = date('Y-m-d H:i:s', strtotime($dateloc. '+ 2 hours'));
+
+        $location->setDateheuredepartp(new DateTime($dateD));
+        $location->setDatelocation(new DateTime($dateloc));
+        $location->setHateheureretourp(new DateTime($dateR));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($location);
+        $em->flush();
+        return $this->redirectToRoute('app_home');
+        return $this->render('home/index.html.twig');
     }
 
     /**
-     * @Route("/reservation", name="ListeReservation")
-     */
-
-    public function AfficherReserv()
-    {
-        $repository = $this->getDoctrine()->getRepository(Location::class);
-        $lesLocations = $repository->findAll();
-
-        return $this->render('home/profil.html.twig', ['lesLocations' => $lesLocations]);
-    }
-
-    /**
-     * @Route("/reservation2", name="reservation2")
-     */
-    public function reserv2(Request $request, EntityManagerInterface $entityManager): Response
-    {
-
-        $repository = $this->getDoctrine()->getRepository(Location::class);
-        $dateloc = new \DateTime();
-        // $dateD = $request->request->get('dateD');
-        // dump($dateD);
-
-        $user = $this->getUser();
-
-        // if ($user == null){
-        //     $this->addFlash('error', "Veuillez vous connectez pour faire une réservation  !");
-        //     return $this->redirectToRoute('app_home');
-        // }
-        // elseif ($this->getDoctrine()->getRepository(Location::class)->findOneBy(array('numlocation' => $laLoc->getNumlocation(), 'idutilisateur' => $utilisateur->getIdutilisateur())) !== null) {
-
-        //     $this->addFlash('error', "Vous avez déjà une réservation !");
-        //     return $this->redirectToRoute('oui');
-        // }
-        // else {
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $location = new location();
-            $location->setIdutilisateur($user->getIdutilisateur());
-            // $location->setDateheuredepartp($dateD);
-            $location->setDatelocation(new DateTime('now'));
-
-            $entityManager->persist($location);
-            $entityManager->flush();
-       
-            // return $this->redirectToRoute('form2');
-
-
-    // }
-    
-return $this->render('home/form2.html.twig');
-
-}
-/**
-     * @Route("/coucou", name="coucou")
+     * @Route("/accueil", name="accueil")
      */
     public function coucou(Request $request): Response
     {
-        return $this->render('home/coucou.html.twig', [
+        return $this->render('home/accueil.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
