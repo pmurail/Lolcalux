@@ -12,13 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Salarie extends Utilisateur
 {
-
     /**
      * @var string|null
      *
-     * @ORM\Column(name="POSTE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="POSTE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $poste = 'NULL';
+    private $poste;
 
     public function getPoste(): ?string
     {
@@ -31,6 +30,5 @@ class Salarie extends Utilisateur
 
         return $this;
     }
-
 
 }

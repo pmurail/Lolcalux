@@ -58,19 +58,19 @@ class HomeController extends AbstractController
     public function reservation(Request $request): Response
     {
         $modele = $request->request->get("modele");
-        $trajet = $request->request->get("trajet");
+        //$trajet = $request->request->get("trajet");
         $formule = $request->request->get("formule");
         $vehicule = new Vehicule;
         //$vehicule->setImmatriculation("FR-85-SIO");
         $vehicule->setIdmodele($this->getDoctrine()->getRepository(Modele::class)->findOneBy(['idmodele' => $modele]));
         $location = new Locationsanschauffeur;
         $location->setIdformule($this->getDoctrine()->getRepository(Formule::class)->findOneBy(['idformule' => $formule]));
-        $location->setIdtrajet($this->getDoctrine()->getRepository(Trajet::class)->find($trajet));
+        //$location->setIdtrajet($this->getDoctrine()->getRepository(Trajet::class)->findOneBy(['idtrajet' => $trajet]));
         $location->setIdutilisateur($this->getUser());
         $em = $this->getDoctrine()->getManager();
         $em->persist($location);
         $em->flush();
-
-        return $this->render('home/inscription.html.twig');
+        return $this->redirectToRoute('app_home');
+        return $this->render('home/index.html.twig');
     }
 }

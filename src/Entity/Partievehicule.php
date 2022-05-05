@@ -24,9 +24,9 @@ class Partievehicule
     /**
      * @var string|null
      *
-     * @ORM\Column(name="PIECE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="PIECE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $piece = 'NULL';
+    private $piece;
 
     public function getIdpartievehicule(): ?int
     {

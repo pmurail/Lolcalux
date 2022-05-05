@@ -15,16 +15,16 @@ class Locationavecchauffeur extends Location
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="NOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $nom = 'NULL';
+    private $nom;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="PRENOM", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $prenom = 'NULL';
+    private $prenom;
 
     /**
      * @var \Formuleavecchauffeur
@@ -36,7 +36,6 @@ class Locationavecchauffeur extends Location
      */
     private $idformule;
 
-    
     public function getNom(): ?string
     {
         return $this->nom;
@@ -60,6 +59,7 @@ class Locationavecchauffeur extends Location
 
         return $this;
     }
+
 
     public function getIdformule(): ?Formuleavecchauffeur
     {

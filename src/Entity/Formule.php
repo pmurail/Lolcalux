@@ -27,10 +27,11 @@ class Formule
     /**
      * @var string|null
      *
-     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="LIBELLE", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $libelle = 'NULL';
+    private $libelle;
 
+ 
     public function getIdformule(): ?int
     {
         return $this->idformule;
@@ -47,6 +48,7 @@ class Formule
 
         return $this;
     }
+
 
 
 }

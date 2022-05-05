@@ -15,16 +15,16 @@ class Locationsanschauffeur extends Location
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NBKMDEPART", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="NBKMDEPART", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $nbkmdepart = 'NULL';
+    private $nbkmdepart;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="NBKMRETOUR", type="string", length=32, nullable=true, options={"default"="NULL","fixed"=true})
+     * @ORM\Column(name="NBKMRETOUR", type="string", length=32, nullable=true, options={"fixed"=true})
      */
-    private $nbkmretour = 'NULL';
+    private $nbkmretour;
 
     /**
      * @var \Formulesanschauffeur

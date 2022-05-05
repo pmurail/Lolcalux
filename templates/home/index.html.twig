@@ -45,12 +45,12 @@
 					<option value="{{unModeles.idmodele}}">{{unModeles.libelle}}</option>
 					{% endfor %}
 				</select>
-				<select class="form-select" aria-label="Default select example" name="trajet" style="margin-bottom: 20px;">
+				{#<select class="form-select" aria-label="Default select example" name="trajet" style="margin-bottom: 20px;">
 					<option selected>Selectionner un trajet</option>
 					{% for unTrajets in lesTrajets %}
 					<option value="{{unTrajets.idtrajet}}">{{unTrajets.lieudepart}} - {{unTrajets.lieuarrivee}}</option>
 					{% endfor %}
-				</select>
+				</select>#}
 				<input type="submit"></input>
 		</form>
 	{% endblock %}
