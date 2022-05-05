@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire
+{% endblock %}
+
+{% block body %}
+
+	<form method="post" action="{{path('app_home')}}">
+		{% if app.user %}
+			<div class="mb-3">
+				Bonjour,
+				{{ app.user.username }},
+				<a href="{{ path('app_logout') }}">Déconnexion</a>
+			</div>
+		{% endif %}
+
+		<form id="form1" method="post">
+			<label for="inputLogin"col-auto>Date et heure de départ souhaitée</label>
+			<input type="datetime-local" name="dateD" id="inputDateD" class="form-control" autocomplete="username" required autofocus>
+		</br>
+        
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+		<button formaction="{{path('reservation2', {'id':Location.numlocation})}}" type="submit" class="btn btn-primary" id="btn-dateD">Réserver</button>
+	</form>
+    
+
+
+	{# <h1 class="h3 mb-3 font-weight-normal">Veulliez rentrer les informations ci-dessous</h1>
+	<label for="inputLogin" col-auto>Date et heure de départ souhaitée</label>
+	<input type="datetime-local" name="dateD" id="inputDateD" class="form-control" autocomplete="username" required autofocus>
+
+	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+	<button class="btn btn-lg btn-primary" type="submit" href="{{ path('coucou') }}">
+		Réserver
+	</button> #}
+</form>{% endblock %}

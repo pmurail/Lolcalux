@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+
 
 {% block body %}
 	<style>
@@ -51,6 +50,22 @@
 					<option value="{{unTrajets.idtrajet}}">{{unTrajets.lieudepart}} - {{unTrajets.lieuarrivee}}</option>
 					{% endfor %}
 				</select>#}
+				
+				<label for="inputLogin"col-auto>Date et heure de départ souhaitée</label>
+			<input class="form-control" type="datetime-local" name="dateD" id="inputDateD" required autofocus>
+			
+		</br>
+        
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+	</br>
+
+	<label for="inputLogin"col-auto>Date et heure de retour souhaitée</label>
+			<input class="form-control" type="datetime-local" name="dateR" id="inputDateR" required autofocus>
+
+	</br>
+	</br>
+
 				<input type="submit"></input>
 		</form>
 	{% endblock %}
