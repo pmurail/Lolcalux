@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="app_home")
+     * @Route("/", name="app_home")
      */
     public function index(Request $request): Response
     {
@@ -73,14 +73,13 @@ class HomeController extends AbstractController
         //$location->setIdtrajet($this->getDoctrine()->getRepository(Trajet::class)->findOneBy(['idtrajet' => $trajet]));
         $location->setIdutilisateur($this->getUser());
 
-
-
+      
         $location = new Location();
         $dateloc = new \DateTime('now');
         $dateD = $request->request->get('dateD');
         $dateR = $request->request->get('dateR');
         $location->setIdutilisateur($this->getUser());
-
+        
         $dateD = $request->request->get('dateD');
         $dateR = $request->request->get('dateR');
 

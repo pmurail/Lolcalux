@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeUser", type="string")
  * @ORM\DiscriminatorMap({"utilisateur" = "Utilisateur", "salarie" = "Salarie", "client" = "Client"})
- * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
  */
 class Utilisateur implements UserInterface
 {
@@ -98,17 +97,6 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(?string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
 
 
      /**
@@ -122,6 +110,11 @@ class Utilisateur implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->login;
+    }
+
+    public function getUserIdentifier()
+    {
+        return $this->login;
     }
     public function getRoles(): array
     {
